@@ -1,0 +1,17 @@
+groups:
+- name: web_app_alerts
+  rules:
+  - alert: HighResponseTime
+    expr: avg(avg_response_time) > 0.5
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Высокое время ответа"
+  - alert: AppUnavailable
+    expr: up{job="web_app"} == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Приложение недоступно"
